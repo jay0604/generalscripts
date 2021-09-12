@@ -1,0 +1,28 @@
+#!/bin/sh
+# Start of Script file
+
+#! This script will add transports to buffer one by one sequentially.
+
+# The list of transport should be given in transport_list.txt file where
+
+# each transport should be in new line.
+
+###
+
+TPLIST=/usr/sap/TrnScript/transport_list.txt
+
+TPSTATUS=${TPLIST}.log
+
+for i in `cat ${TPLIST}`
+
+do
+
+/usr/sap/QS4/D00/exe/tp addtobuffer $i QS4 u1 pf=/usr/sap/trans_s4/bin/TP_DOMAIN_QS4.PFL
+
+      RC=$?
+
+    print “`date`…Transport ${i} Status RC=${RC}” >> ${TPSTATUS}
+
+done
+#END
+
